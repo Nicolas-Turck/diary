@@ -1,6 +1,6 @@
 import calendar
-    """class for display all informations of program"""
 class Display():
+    """class for display all informations of program"""
     def __init__(self):
         pass
     def show_calendar(self):
