@@ -9,7 +9,7 @@ class Connection():
     DATABASE = "diary"
 
     def __init__(self):
-        """"""
+        """constructor of class"""
         self.connection = None
         self.cursor = None
 
