@@ -44,3 +44,12 @@ class Events():
         self.db.cursor.execute("DELETE FROM events WHERE date = %s AND heure = %s;", (self.date, self.heure))
         self.db.connection.commit()
         self.db.close_connection()
+
+    def display_events(self):
+        self.date = input("enter date for view events:")
+        self.db.initialize_connection()
+        self.db.cursor.execute("SELECT * FROM events WHERE date = %s;", (self.date,))
+        # self.db.cursor.execute("DELETE FROM events WHERE date = %s AND heure = %s;", (self.date, self.heure))
+        view = self.db.cursor.fetchall()
+        self.db.close_connection()
+        return view

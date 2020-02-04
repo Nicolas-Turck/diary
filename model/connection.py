@@ -18,7 +18,6 @@ class Connection():
         try:
             self.connection = psycopg2.connect(user = Connection.USER, port = Connection.PORT, database = Connection.DATABASE)
             self.cursor = self.connection.cursor(cursor_factory=psycopg2.extras.DictCursor)
-            print("test connection to bdd is ok")
         except (Exception, psycopg2.Error) as error:
             print("error no connecting PostgreSQL", error)
 

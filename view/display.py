@@ -1,6 +1,8 @@
 from model.connection import *
 import calendar
 import datetime
+from model.commander import *
+
 class Display():
     """class for display all informations of program"""
     def __init__(self):
@@ -8,15 +10,19 @@ class Display():
         self.month = 2
         self.date = None
         self.db = Connection()
-
+        self.model = Events()
     def show_calendar(self):
         """method for display calendar with calendar method of python"""
         cal= calendar.TextCalendar(calendar.MONDAY)
         str = cal.formatmonth(self.year,self. month)
-        date = datetime.datetime.now()
+        date = datetime.date.today()
+        #date = datetime.datetime.now()
         strr = date
-        print(strr)
-        print(str)
+        #print(strr)
+        print("\033[31mBonjour docteur Derieux \nnous sommes le: {}\033[0m".format(strr))
+        print("\033[36m{}\033[0m".format(str))
+
+
 
     def next_month(self):
         """method for change for next month"""
@@ -34,21 +40,16 @@ class Display():
 
     def show_events(self):
         """method for display events  """
-        self.date = input("enter date for view events:")
-        self.db.initialize_connection()
-        self.db.cursor.execute("SELECT * FROM events WHERE date = %s;",(self.date,))
-        #self.db.cursor.execute("DELETE FROM events WHERE date = %s AND heure = %s;", (self.date, self.heure))
-        view = self.db.cursor.fetchall()
-        self.db.close_connection()
-        for row in view:
-            print("\nrendez vous  :  {} ".format(row['titre']))
-            print("a faire  {} \n le {} à {}".format(
-                row['description'],
-                row['date'].strftime("%d/%m/%Y"),
-                row['heure'].strftime("%H:%M")
-            ))
-            print("\n------------------------------")
+        view = self.model.display_events()
+        if view:
+            for row in view:
+                print("\nrendez vous  :  {} ".format(row['titre']))
+                print("a faire  {} \n le {} à {}".format(
+                    row['description'],
+                    row['date'].strftime("%d/%m/%Y"),
+                    row['heure'].strftime("%H:%M")
+                ))
+                print("\n------------------------------")
 
-
-        #else:
-            #print("no events ")
+        else:
+            print("no events ")
