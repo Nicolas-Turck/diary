@@ -8,8 +8,8 @@ test.show_calendar()
 if __name__=='__main__':
     choice = ""
     while choice != "q":
-        choice = input("\033[32menter (n) next month (p) previous month \n"
-                       "(c) create events (v) view events (d) delette events (w) change events (q) exit : \033[0m")
+        choice = input("\033[32menter:\n-(n) next month\n-(p) previous month\n"
+                       "-(c) create events\n-(v) view events\n-(d) delette events\n-(w) change events\n-(q) exit : \033[0m")
         if choice == "n":
             os.system("clear")
             test.next_month()

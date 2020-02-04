@@ -22,21 +22,19 @@ class Display():
         print("\033[31mHello Doctor  Derieux \nwe are the : {}\033[0m".format(strr))
         print("\033[36m{}\033[0m".format(str))
 
-
-
     def next_month(self):
         """method for change for next month"""
         self.month += 1
         cal = calendar.TextCalendar(calendar.MONDAY)
         str = cal.formatmonth(self.year, self.month)
-        print(str)
+        print("\033[36m{}\033[0m".format(str))
 
     def previous_month(self):
         """method for change for previous month"""
         self.month -= 1
         cal = calendar.TextCalendar(calendar.MONDAY)
         str = cal.formatmonth(self.year, self.month)
-        print(str)
+        print("\033[36m{}\033[0m".format(str))
 
     def show_events(self):
         """method for display events  """
