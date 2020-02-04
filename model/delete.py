@@ -1,11 +1,11 @@
 from model.connection import *
 class Delete_event():
     """class for delette event in diary """
-
     def __init__(self):
         self.heure = None
         self.date = None
         self.db = Connection()
+
     def del_events(self):
         """"method for delte user account after connect to bdd"""
         self.db.initialize_connection()
