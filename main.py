@@ -4,20 +4,28 @@ from model.create import *
 from model.delete import *
 from model.change import *
 
-if __name__=='__main__':
 
-    test = Connection()
-    test.initialize_connection()
-    test.close_connection()
-    view = Display()
-    view.show_calendar()
+calendar = Display()
+calendar.show_calendar()
+if __name__=='__main__':
     choice =""
     while choice != "q":
-        choice = input("enter (c) for create events (v) for view events (d) for delette events (w) for change events : ")
+        choice = input("enter (n) for next month (p) for prvious month \n"
+                       "(c) for create events (v) for view events (d) for delette events (w) for change events : ")
+
+        if choice =="n":
+            next = Display()
+            next.next_month()
+
+        if choice == "p":
+            prev = Display()
+            prev.previous_month()
+
         if choice == "c":
             testcreate = Create_event()
             testcreate.create_rdv()
         if choice == "v":
+            view = Display()
             view.show_events()
 
         if choice == "d":

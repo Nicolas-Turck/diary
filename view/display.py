@@ -3,13 +3,27 @@ import calendar
 class Display():
     """class for display all informations of program"""
     def __init__(self):
-
+        self.year = 2020
+        self.month = 2
         self.choice = Connection()
     def show_calendar(self):
         """method for display calendar with calendar method of python"""
-        c = calendar
-        print(calendar.month(2020, 2))
-        print(c)
+
+        cal= calendar.TextCalendar(calendar.MONDAY)
+        str = cal.formatmonth(self.year,self. month)
+        print(str)
+
+    def next_month(self):
+        self.month += 1
+        cal = calendar.TextCalendar(calendar.MONDAY)
+        str = cal.formatmonth(self.year, self.month)
+        print(str)
+
+    def previous_month(self):
+        self.month -= 1
+        cal = calendar.TextCalendar(calendar.MONDAY)
+        str = cal.formatmonth(self.year, self.month)
+        print(str)
 
     def show_events(self):
         """method for display events  """
