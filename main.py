@@ -1,7 +1,7 @@
 from view.display import *
 from model.commander import *
 import os
-os.system("color 3")
+
 
 test = Display()
 test.show_calendar()

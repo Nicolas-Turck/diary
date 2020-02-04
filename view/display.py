@@ -19,7 +19,7 @@ class Display():
         #date = datetime.datetime.now()
         strr = date
         #print(strr)
-        print("\033[31mBonjour docteur Derieux \nnous sommes le: {}\033[0m".format(strr))
+        print("\033[31mHello Doctor  Derieux \nwe are the : {}\033[0m".format(strr))
         print("\033[36m{}\033[0m".format(str))
 
 
@@ -43,8 +43,8 @@ class Display():
         view = self.model.display_events()
         if view:
             for row in view:
-                print("\nrendez vous  :  {} ".format(row['titre']))
-                print("a faire  {} \n le {} à {}".format(
+                print("\n\033[36mrendez vous  :  {} ".format(row['titre']))
+                print("a faire  {} \n le {} à {}\033[0m".format(
                     row['description'],
                     row['date'].strftime("%d/%m/%Y"),
                     row['heure'].strftime("%H:%M")
