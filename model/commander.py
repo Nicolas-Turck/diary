@@ -1,5 +1,6 @@
 from model.connection import *
-
+from controller.controller import *
+from view.hydrate import *
 class Events():
     """class for add event in the diary"""
     def __init__(self):
@@ -9,7 +10,7 @@ class Events():
         self.heure = None
         self.new_datta = None
         self.description = None
-
+        self.verif = Verify()
     def create_rdv(self):
         """method for create user account after register entry in attributes """
         self.db.initialize_connection()
@@ -22,7 +23,6 @@ class Events():
                                    (self.title, self.date, self.heure, self.description))
         self.db.connection.commit()
         self.db.close_connection()
-
 
     def change_datta(self):
         """method for delete events after connect to bdd"""
@@ -38,19 +38,22 @@ class Events():
             self.db.close_connection()
 
     def del_events(self):
-        """"method for delte user account after connect to bdd"""
+        """"method for delete user account after connect to bdd"""
         self.db.initialize_connection()
         self.date = input("\033[35menter date : \33[0m")
         self.heure = input("\033[35menter heure :\33[0m")
-        self.db.cursor.execute("DELETE FROM events WHERE date = %s AND heure = %s;", (self.date, self.heure))
-        self.db.connection.commit()
-        self.db.close_connection()
+        self.verif.verifEvents(self.date, self.heure)
+        #self.db.cursor.execute("DELETE FROM events WHERE date = %s AND heure = %s;", (self.date, self.heure))
+        #self.db.connection.commit()
+        #self.db.close_connection()
 
     def display_events(self):
         self.date = input("\033[35menter date for view events:\33[0m")
         self.db.initialize_connection()
         self.db.cursor.execute("SELECT * FROM events WHERE date = %s;", (self.date,))
-        # self.db.cursor.execute("DELETE FROM events WHERE date = %s AND heure = %s;", (self.date, self.heure))
-        view = self.db.cursor.fetchall()
+        views = self.db.cursor.fetchall()
+        print(views)
         self.db.close_connection()
-        return view
+        showevents = Hydrate(views)
+        showevents.show_informations(views)
+        #return views
