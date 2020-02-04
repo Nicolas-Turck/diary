@@ -1,15 +1,21 @@
 from model.connection import *
 import calendar
+import datetime
 class Display():
     """class for display all informations of program"""
     def __init__(self):
         self.year = 2020
         self.month = 2
-        self.choice = Connection()
+        self.date = None
+        self.db = Connection()
+
     def show_calendar(self):
         """method for display calendar with calendar method of python"""
         cal= calendar.TextCalendar(calendar.MONDAY)
         str = cal.formatmonth(self.year,self. month)
+        date = datetime.datetime.now()
+        strr = date
+        print(strr)
         print(str)
 
     def next_month(self):
@@ -28,10 +34,12 @@ class Display():
 
     def show_events(self):
         """method for display events  """
-        self.choice.initialize_connection()
-        self.choice.cursor.execute("SELECT * FROM events;")
-        view = self.choice.cursor.fetchall()
-        self.choice.close_connection()
+        self.date = input("enter date for view events:")
+        self.db.initialize_connection()
+        self.db.cursor.execute("SELECT * FROM events WHERE date = %s;",(self.date,))
+        #self.db.cursor.execute("DELETE FROM events WHERE date = %s AND heure = %s;", (self.date, self.heure))
+        view = self.db.cursor.fetchall()
+        self.db.close_connection()
         for row in view:
             print("\nrendez vous  :  {} ".format(row['titre']))
             print("a faire  {} \n le {} à {}".format(

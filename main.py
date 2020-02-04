@@ -1,7 +1,8 @@
 from view.display import *
-from model.create import *
-from model.delete import *
-from model.change import *
+from model.commander import *
+
+
+
 import os
 test = Display()
 test.show_calendar()
@@ -15,16 +16,17 @@ if __name__=='__main__':
         if choice == "p":
             test.previous_month()
         if choice == "c":
-            testcreate = Create_event()
-            testcreate.create_rdv()
+            create = Events()
+            create.create_rdv()
         if choice == "v":
+            test = Display()
             test.show_events()
         if choice == "d":
-            test = Delete_event()
-            test.del_events()
+            delette = Events()
+            delette.del_events()
         if choice == "w":
-            test = Change_event()
-            test.change_datta()
+            write = Events()
+            write.change_datta()
         if choice == "q":
             exit()
 
