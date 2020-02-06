@@ -1,11 +1,16 @@
 from model.connection import *
 from model.entities import *
+import calendar
 
 
 class Events():
     """class for add event in the diary"""
     def __init__(self):
         self.db = Connection()
+        self.year = 2020
+        self.month = 2
+        self.str = None
+
 
     def create_rdv(self, titre, date, heure, description):
         """method for create user account after register entry in attributes """
@@ -35,20 +40,35 @@ class Events():
         self.db.close_connection()
 
     def display_events(self, date):
-        datta = {}
+        """method for display event if his in bdd"""
+        #datta = {}
+
         sql = "SELECT events.titre titre , events.date date, events.heure heure, events.description  description FROM events WHERE date = %s;"
         arguments = (date,)
         self.db.initialize_connection()
-        self.db.cursor.execute(sql, arguments)
-        #datta = self.db.cursor.fetchall()
-        donnees = self.db.cursor.fetchone()
-        fields = self.db.cursor.description
-        i = 0
-        for field in fields:
-            datta[field[0]] = str(donnees[i])
-            i += 1
-            print(datta)
 
-        ydra = Hydrate(datta)
-        ydra.show()
-        self.db.close_connection()
+        self.db.cursor.execute(sql, arguments)
+        #dict = self.db.cursor.fetchall()
+        liste=list()
+        for el in self.db.cursor:
+            print(el['titre'], el['date'], el['heure'], el['description'])
+            liste.append({'titre': el['titre'] , 'date': el['date'] ,'heure': el['heure'], 'description': el['description'] })
+
+        for dicto in liste:
+            ydra = Hydrate(dicto)
+            ydra.show()
+        #self.db.close_connection()
+
+    def next_month(self):
+        """method for change month"""
+        self.month += 1
+        cal = calendar.TextCalendar(calendar.MONDAY)
+        str = cal.formatmonth(self.year, self.month)
+        print("\033[36m{}\033[0m".format(str))
+
+    def previous_month(self):
+        """method for change month"""
+        self.month -= 1
+        cal = calendar.TextCalendar(calendar.MONDAY)
+        str = cal.formatmonth(self.year, self.month)
+        print("\033[36m{}\033[0m".format(str))

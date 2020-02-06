@@ -17,16 +17,11 @@ if __name__=='__main__':
                        "-(c) create events\n-(v) view events\n-(d) delette events\n-(w) change events\n-(q) exit : \033[0m")
 
         if choice == "n":
-            month += 1
-            cal = calendar.TextCalendar(calendar.MONDAY)
-            str = cal.formatmonth(year, month)
-            print("\033[36m{}\033[0m".format(str))
+            test = Display()
+            test.next_month()
         if choice =="p":
-            month -= 1
-            cal = calendar.TextCalendar(calendar.MONDAY)
-            str = cal.formatmonth(year, month)
-            print("\033[36m{}\033[0m".format(str))
-
+            test = Display()
+            test.previous_month()
         if choice == "c":
             #os.system("clear")
             test = Display()
@@ -47,8 +42,6 @@ if __name__=='__main__':
             #os.system("clear")
             write = Display()
             write.change_datta()
-
-
 
 
         if choice == "q":

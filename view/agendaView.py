@@ -8,8 +8,8 @@ class Display():
     def __init__(self):
         self.date = None
         self.hydr = Events()
-
-
+        self.events =Events()
+        self.cal = Events()
 
     def show_events(self):
         """method for display events  """
@@ -42,5 +42,12 @@ class Display():
         heure = input("\033[35menter heure :\33[0m")
         self.events.del_events(date, heure)
 
+    def next_month(self):
+        self.cal.next_month()
+        print("\033[36m{}\033[0m".format(str))
+
+    def previous_month(self):
+        self.cal.previous_month()
+        print("\033[36m{}\033[0m".format(str))
 
 
