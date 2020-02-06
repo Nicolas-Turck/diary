@@ -6,15 +6,6 @@ class Events():
     """class for add event in the diary"""
     def __init__(self):
         self.db = Connection()
-        #self.title = None
-        #self.date = None
-        #self.heure = None
-        #self.new_datta = None
-        #self.description = None
-
-
-
-
 
     def create_rdv(self, titre, date, heure, description):
         """method for create user account after register entry in attributes """
@@ -44,16 +35,20 @@ class Events():
         self.db.close_connection()
 
     def display_events(self, date):
-        #sql = "SELECT * FROM events WHERE date = %s;"
+        datta = {}
+        sql = "SELECT events.titre titre , events.date date, events.heure heure, events.description  description FROM events WHERE date = %s;"
+        arguments = (date,)
         self.db.initialize_connection()
-        self.db.cursor.execute("SELECT titre, date, heure, description FROM events WHERE date = %s;", (date,))
-        views = self.db.cursor.fetchall()
-        print(views)
+        self.db.cursor.execute(sql, arguments)
+        #datta = self.db.cursor.fetchall()
+        donnees = self.db.cursor.fetchone()
+        fields = self.db.cursor.description
+        i = 0
+        for field in fields:
+            datta[field[0]] = str(donnees[i])
+            i += 1
+            print(datta)
 
-        ydra = Hydrate(views)
+        ydra = Hydrate(datta)
         ydra.show()
         self.db.close_connection()
-
-        #showevents = Hydrate(views)
-        #showevents.show_informations(views)
-        #return views

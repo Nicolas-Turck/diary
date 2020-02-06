@@ -6,12 +6,8 @@ from model.entities import *
 class Display():
     """class for display all informations of program"""
     def __init__(self):
-        self.year = 2020
-        self.month = 2
         self.date = None
-        #self.db = Connection()
-        self.events = Events()
-        #self.hydr = Hydrate()
+        self.hydr = Events()
 
 
 
@@ -19,7 +15,7 @@ class Display():
         """method for display events  """
         date = input("\033[35menter date for view events:\33[0m")
 
-        self.events.display_events(date)
+        events = self.hydr.display_events(date)
 
 
     def request_events(self):

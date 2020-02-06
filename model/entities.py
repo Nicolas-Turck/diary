@@ -1,31 +1,23 @@
 from model.agendaModel import*
 class Hydrate():
     """class for hydrate attribut before print them"""
-    def __init__(self, views):
+    def __init__(self, datta):
         """method for initialise atrributs """
-        self.titre = None
+        self.titre= None
         self.date = None
-        self.heure = None
+        self.heure= None
         self.description = None
         #if views:
-        self.hydrate(views)
+        self.hydrate(datta)
 
 
-    def hydrate(self, views):
+    def hydrate(self, datta):
         """method for add elem in attribus"""
-        for i in views:
-            print(i)
-            for j in i:
-                print(j)
-
-                """for key_name, value_name in j:
-                    if hasattr(self, key_name):
-                        setattr(self, key_name, value_name)"""
+        for key_name, value_name in datta.items():
+            if hasattr(self, key_name):
+                setattr(self, key_name, value_name)
 
     def show(self):
         """method for display elem of city"""
-        events = "title \n \
-                    date : {} \n\
-                    heure : {} \n\
-                    description : {} \n"
+        events = "title {} \n date : {} \n heure : {}  \n description : {} "
         print(events.format(self.titre, self.date, self.heure, self.description))
