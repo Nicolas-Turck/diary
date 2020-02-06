@@ -8,6 +8,7 @@ class Hydrate():
         self.heure= None
         self.description = None
         #if views:
+
         self.hydrate(dicto)
 
 
@@ -20,5 +21,6 @@ class Hydrate():
     def show(self):
         """method for display elem of city"""
         events = "Bonjour voici vos rendez vous pour la journée \n " \
-                 "title {} \n date : {} \n heure : {}  \n description : {} "
+                 "title {} \n date : {} \n heure : {}  \n description : {} " \
+                 "\n_______________________________"
         print(events.format(self.titre, self.date, self.heure, self.description))

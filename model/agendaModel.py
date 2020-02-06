@@ -1,7 +1,7 @@
 from model.connection import *
 from model.entities import *
 import calendar
-
+import os
 
 class Events():
     """class for add event in the diary"""
@@ -10,7 +10,6 @@ class Events():
         self.year = 2020
         self.month = 2
         self.str = None
-
 
     def create_rdv(self, titre, date, heure, description):
         """method for create user account after register entry in attributes """
@@ -46,18 +45,24 @@ class Events():
         sql = "SELECT events.titre titre , events.date date, events.heure heure, events.description  description FROM events WHERE date = %s;"
         arguments = (date,)
         self.db.initialize_connection()
-
         self.db.cursor.execute(sql, arguments)
-        #dict = self.db.cursor.fetchall()
-        liste=list()
+        liste = list()
         for el in self.db.cursor:
             print(el['titre'], el['date'], el['heure'], el['description'])
-            liste.append({'titre': el['titre'] , 'date': el['date'] ,'heure': el['heure'], 'description': el['description'] })
-
+            liste.append(
+                {'titre': el['titre'], 'date': el['date'], 'heure': el['heure'], 'description': el['description']})
         for dicto in liste:
             ydra = Hydrate(dicto)
             ydra.show()
-        #self.db.close_connection()
+
+
+        self.db.close_connection()
+
+    def show_calendar(self):
+        """method for display calendar"""
+        cal = calendar.TextCalendar(calendar.MONDAY)
+        str = cal.formatmonth(self.year, self.month)
+        print("\033[36m{}\033[0m".format(str))
 
     def next_month(self):
         """method for change month"""
