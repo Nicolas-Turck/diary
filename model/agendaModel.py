@@ -45,7 +45,7 @@ class Events():
         arguments = (date,)
         self.db.initialize_connection()
         self.db.cursor.execute(sql, arguments)
-        dliste = list()
+        liste = list()
         for el in self.db.cursor:
             print(el['titre'], el['date'], el['heure'], el['description'])
             liste.append(
