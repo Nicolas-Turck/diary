@@ -7,10 +7,7 @@ class Hydrate():
         self.date = None
         self.heure= None
         self.description = None
-        #if views:
-
         self.hydrate(dicto)
-
 
     def hydrate(self, dicto):
         """method for add elem in attribus"""

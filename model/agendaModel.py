@@ -1,6 +1,7 @@
 from model.connection import *
 from model.entities import *
 import calendar
+import datetime
 import os
 
 class Events():
@@ -64,16 +65,3 @@ class Events():
         str = cal.formatmonth(self.year, self.month)
         print("\033[36m{}\033[0m".format(str))
 
-    def next_month(self):
-        """method for change month"""
-        self.month += 1
-        cal = calendar.TextCalendar(calendar.MONDAY)
-        str = cal.formatmonth(self.year, self.month)
-        print("\033[36m{}\033[0m".format(str))
-
-    def previous_month(self):
-        """method for change month"""
-        self.month -= 1
-        cal = calendar.TextCalendar(calendar.MONDAY)
-        str = cal.formatmonth(self.year, self.month)
-        print("\033[36m{}\033[0m".format(str))
