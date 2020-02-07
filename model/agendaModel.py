@@ -14,9 +14,9 @@ class Events():
 
     def create_rdv(self, titre, date, heure, description):
         """method for create user account after register entry in attributes """
+        self.db.initialize_connection()
         sql = "INSERT INTO events(titre, date, heure, description) VALUES (%s, %s, %s, %s);"
         arguments = (titre, date, heure, description)
-        self.db.initialize_connection()
         self.db.cursor.execute(sql, arguments)
         self.db.connection.commit()
         self.db.close_connection()
@@ -41,13 +41,11 @@ class Events():
 
     def display_events(self, date):
         """method for display event if his in bdd"""
-        #datta = {}
-
         sql = "SELECT events.titre titre , events.date date, events.heure heure, events.description  description FROM events WHERE date = %s;"
         arguments = (date,)
         self.db.initialize_connection()
         self.db.cursor.execute(sql, arguments)
-        liste = list()
+        dliste = list()
         for el in self.db.cursor:
             print(el['titre'], el['date'], el['heure'], el['description'])
             liste.append(
@@ -55,8 +53,6 @@ class Events():
         for dicto in liste:
             ydra = Hydrate(dicto)
             ydra.show()
-
-
         self.db.close_connection()
 
     def show_calendar(self):
