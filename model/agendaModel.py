@@ -45,11 +45,12 @@ class Events():
         arguments = (date,)
         self.db.initialize_connection()
         self.db.cursor.execute(sql, arguments)
+        rows = self.db.cursor.fetchall()
         liste = list()
-        for el in self.db.cursor:
-            print(el['titre'], el['date'], el['heure'], el['description'])
+        for row in rows:
+            #print(row[0], row[1], row[2], row[3])
             liste.append(
-                {'titre': el['titre'], 'date': el['date'], 'heure': el['heure'], 'description': el['description']})
+                {'titre': row[0], 'date': row[1], 'heure': row[2], 'description': row[3]})
         for dicto in liste:
             ydra = Hydrate(dicto)
             ydra.show()
