@@ -1,8 +1,6 @@
-from model.connection import *
-
+#import os
+from controller.controller import *
 
 if __name__=='__main__':
-
-    test = Connection()
-    test.initialize_connection()
-    test.close_connection()
+    start = Controller()
+    start.start()
